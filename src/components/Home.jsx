@@ -2,8 +2,85 @@ import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import CompanyComponent from "../pages/CompanyComponent";
 import axios from "axios";
-import UserComponent from "../pages/UserComponent";
 import AdminComponent from "../pages/AdminComponent";
+import UserComponent from "../pages/UserComponent";
+
+import StoreComponent from "../pages/main/StoreComponent";
+import SearchComponent from "../pages/main/SearchComponent";
+import AllProductsComponent from "../pages/main/AllProductsComponent";
+
+// const Home = () => {
+//     const [searchResults, setSearchResults] = useState([]);
+//     const [allProducts, setAllProducts] = useState([]);
+//     const [storeInfo, setStoreInfo] = useState({});
+//     const [loading, setLoading] = useState(false);
+//     const [error, setError] = useState(null);
+//
+//
+//     // 전체상품 가져오는 API
+//     const apiAllProducts = () => {
+//         setLoading(true);
+//         axios.get("/api/products")
+//             .then((response) => {
+//                 setAllProducts(response.data);
+//             })
+//             .catch((err) => {
+//                 setError(err.message);
+//             })
+//             .finally(() => {
+//                 setLoading(false);
+//             });
+//     };
+//
+//     // 가게정보 API
+//     const apiStoreInfo = () => {
+//         setLoading(true);
+//         axios.get("/api/store")
+//             .then((response) => {
+//                 setStoreInfo(response.data);
+//             })
+//             .catch((err) => {
+//                 setError(err.message);
+//             })
+//             .finally(() => {
+//                 setLoading(false);
+//             });
+//     };
+//
+//     // main 을 시작했을 때 불러오기
+//     useEffect(() => {
+//         apiAllProducts();
+//         apiStoreInfo();
+//     }, []);
+//
+//     // 검색 기능
+//     const handleSearch = (query) => {
+//         const results = allProducts.filter((product) =>
+//             product.name.toLowerCase().includes(query.toLowerCase())
+//         );
+//         setSearchResults(results);
+//     };
+//
+//     return (
+//         <div>
+//             <h1>홈 페이지</h1>
+//
+//             {/* 검색 컴포넌트*/}
+//             <SearchComponent onSearch={handleSearch} />
+//
+//             {/* 검색한 내용이 있을 경우, 검색에 대한 결과를 main에서 보여주기 */}
+//             {searchResults.length > 0 ? (
+//                 <AllProductsComponent products={searchResults} />
+//             ) : (
+//                 <AllProductsComponent products={allProducts} />
+//             )}
+//             {/* 가게 컴포넌트*/}
+//             <StoreComponent store={storeInfo} />
+//         </div>
+//     );
+// };
+
+
 
 
 const Home = () => {
@@ -32,38 +109,43 @@ const Home = () => {
         }
         console.log("user Role",user.userRole);
         switch (user.userRole) {
-            // 추후 -> 문자열로 전달받는 값을 형변환해서 switch 문에 전달
-            case 1 ,"1":
-                return <AdminComponent/>
+            // 내일 -> 문자열로 전달받는 숫자값을 형변환해서 switch 문에 문자나 숫자값으로 전달
+            case 1, "1":
+                return <AdminComponent />;
             case 2, "2":
-                return <CompanyComponent/>
-            case 3,"3":
-                return <UserComponent/>
+                return <CompanyComponent />
+            case 3, "3":
+                return <UserComponent />;
             default:
                 return <div>접근 권한이 없습니다.</div>;
         }
 
     }
-const handleLogout= () =>{
+
+    const handleLogout = () => {
         axios
-            .get("http://localhost:8080/api/user/logout")
-            .then((response)=>{
-                // 1 번 로그아웃 성공했을 경우
-                if (response.data.status === "logout"){
-                    localStorage.removeItem("user");
-                    sessionStorage.removeItem("user");
-                    setUser(null);
-                    alert("로그아웃 되었습니다.");
-                    navigate("/")
-                }else {
-                    alert("현재 진행중인 작업을 종료하고 로그아웃을 실행해주세요")
+            .post("http://localhost:8080/api/user/logout")
+            .then(
+                (response) => {
+                    // 1 번 로그아웃 성공했을 경우
+                    if(response.data.status === "logout") {
+                        localStorage.removeItem("user");
+                        sessionStorage.removeItem("user");
+                        setUser(null);
+                        alert("로그아웃 되었습니다.");
+                        navigate("/")
+                    } else {
+                        alert(" 현재 진행중인 작업을 종료하고 로그아웃 실행해주세요.");
+                    }
                 }
-            })
-            .catch((err)=>{
-                console.log("logout error :" + err);
-                alert("벡엔드에서 로그아웃을 처리하는데 문제가 발생했습니다.")
-            })
-}
+            )
+            .catch(
+                (err) => {
+                    console.log("logout error : " + err);
+                    alert("백엔드에서 로그아웃을 처리하는데 문제가 발생했습니다.");
+                }
+            )
+    }
 
     return(
         <div>
@@ -75,7 +157,7 @@ const handleLogout= () =>{
 
                 <div>
 
-                    <p>환영합니다. {user.username}님!</p>
+                    <p>환영합니다. {user.userName}님!</p>
                     <button onClick={handleLogout}>로그아웃</button>
 
 

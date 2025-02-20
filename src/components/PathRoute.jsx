@@ -11,8 +11,8 @@ import Home from "./Home";
 import Login from "./Login";
 import ProtectedRoute from "./ProtectedRoute";
 import CompanyPage from "../pages/CompanyPage";
-import UserPage from "../pages/UserPage";
 import AdminPage from "../pages/AdminPage";
+import UserPage from "../pages/UserPage";
 
 function PathRoute () {
     const[user, setUser] = useState(null);
@@ -56,4 +56,4 @@ function PathRoute () {
 
 }
 
-export default PathRoute;
+export  default PathRoute;
