@@ -1,0 +1,58 @@
+.productsearch-container {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.productsearch-container div {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.productsearch-container div ul {
+    position: absolute;
+    width: 100%;
+    background: white;
+    border: 1px solid #ddd;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 150px;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.productsearch-container div ul li {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.productsearch-container div ul li:hover {
+    background-color: #f0f0f0;
+}
+
+.productsearch-container input {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.productsearch-container button {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.productsearch-container button:hover {
+    background-color: #0056b3;
+}

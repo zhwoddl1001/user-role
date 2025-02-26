@@ -13,6 +13,16 @@ import ProtectedRoute from "./ProtectedRoute";
 import CompanyPage from "../pages/CompanyPage";
 import AdminPage from "../pages/AdminPage";
 import UserPage from "../pages/UserPage";
+import PostList from "../pages/posts/PostList";
+import SearchPosts from "../pages/posts/SearchPosts";
+import InsertPost from "../pages/posts/InsertPost";
+import PostDetail from "../pages/posts/PostDetail";
+import UpdatePost from "../pages/posts/UpdatePost";
+import Main from "../pages/boot-page/Main";
+import NavBar from "./NavBar";
+import ProductList from "../pages/product/ProductList";
+import ProductDetail from "../pages/product/ProductDetail";
+import ProductSearch from "../pages/product/ProductSearch";
 
 function PathRoute () {
     const[user, setUser] = useState(null);
@@ -23,10 +33,35 @@ function PathRoute () {
             경로와 관계 없는 jsx 파일은
             Routes 외부에 작성
             */}
+            {/*
+            네비게이션바 헤더 푸터의 경우
+            BrowserRouter 내부이며,
+            Routes        외부에 작성
+            */}
+            <NavBar  user={user}/>
 
             <Routes>
                 {/* 0. 관리자, 회사, 유저에 관계 없이 전체 접근 가능 Components */}
-                <Route path="/" element={<Home/>     } />
+                <Route path="/home" element={<Home/>     } />
+                <Route path="/" element={<Main/>     } />
+
+                <Route path="/posts" element={<PostList />} />
+                <Route path="/posts/:postId" element={<PostDetail />} />
+                <Route path="/posts/search" element={<SearchPosts />} />
+                <Route path="/posts/create" element={<InsertPost />} />
+                {/* PostDetail 에서 수정 버튼 내부 to 속성에 작성한 경로 값 설정 */}
+                <Route path="/posts/edit/:postId" element={<UpdatePost />} />
+
+                {/* Product 경로 설정*/}
+                <Route path="/products" element={<ProductList />} />>
+                <Route path="/products/search" element={<ProductSearch />} />
+                <Route path="/products/:productId" element={<ProductDetail />} />
+
+
+
+
+
+
                 <Route path="/login" element={<Login setUser={setUser}  />} />
                 {/* 1. 관리자만 접근 가능 Components */}
                 <Route path="/company" element={   <ProtectedRoute allowedRoles={ [1] }>
