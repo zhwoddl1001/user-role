@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
 import FormInput from "./FormInput";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 /*
  <FormInput key={field.id} {...field} /> 로 inputFields 를 가져와서 활용하는 방법
@@ -29,16 +29,16 @@ const AddClothes = () => {
  */
     // 의류 정보 상태 관리
     const [formData, setFormData] = useState({
-        cName: "",
-        cCategory: "",
-        cBrand: "",
-        cColor: "",
-        cSize: "",
-        cMaterial: "",
-        cPrice: "",
-        cStock: "",
-        cGender: "",
-        cSeason: "",
+        Name: "",
+        Category: "",
+        Brand: "",
+        Color: "",
+        Size: "",
+        Material: "",
+        Price: "",
+        Stock: "",
+        Gender: "",
+        Season: "",
     });
 
     /* 입력 값 변경 시 상태 업데이트
@@ -79,18 +79,19 @@ const AddClothes = () => {
         })
         console.log("폼 데이터:", formData);
     }
+
+
     // 백엔드 폼 제출 핸들러
     const handleSubmit = (e) => {
         e.preventDefault(); // form 태그가 제출되기 전에 체크하고 제출하기 위해 제출 지연
-
+        // formdata check
+        console.log(formData);
         // 유효성 검사 체크 -> pattern 정규식 type required 와 같은 형식을 참조하여 체크
         const form = e.target;
         if(!form.checkValidity()) {
             form.classList.add("was-validated"); //bootstrap 내부에서만 동작
             return;
         }
-
-
         axios
             .post("http://localhost:8080/api/clothes", formData)
             .then(
@@ -119,16 +120,16 @@ const AddClothes = () => {
     }
 
     const inputFields = [
-        {id: "cName", label: "의류 명칭", placeholder: "상품명을 입력하세요."},                          // index = 0 번
-        {id: "cCategory", label: "카테고리", placeholder: "카테고리(예:티셔츠, 바지, 자켓) 입력하세요."},// index = 1 번
-        {id: "cBrand", label: "브랜드", placeholder: "브랜드명을 입력하세요."},                          // index = 2 번
-        {id: "cColor", label: "색상", placeholder: "색상을 입력하세요."},
-        {id: "cSize", label: "사이즈", placeholder: "사이즈(예:S, M, L, XL)을 입력하세요."},
-        {id: "cMaterial", label: "소재", placeholder: "소재를 입력하세요."},
-        {id: "cPrice", label: "가격", placeholder: "가격을 입력하세요."},
-        {id: "cStock", label: "재고 수량", placeholder: "재고수량을 입력하세요."},
-        {id: "cGender", label: "성별", placeholder: "성별(예:공용, 남성, 여성)을 입력하세요."},
-        {id: "cSeason", label: "시즌", placeholder: "계절(예:봄, 여름, 가을, 겨울, 사계절) 을 입력하세요."},// index = 9 번
+        {id: "Name", label: "의류 명칭", placeholder: "상품명을 입력하세요."},                          // index = 0 번
+        {id: "Category", label: "카테고리", placeholder: "카테고리(예:티셔츠, 바지, 자켓) 입력하세요."},// index = 1 번
+        {id: "Brand", label: "브랜드", placeholder: "브랜드명을 입력하세요."},                          // index = 2 번
+        {id: "Color", label: "색상", placeholder: "색상을 입력하세요."},
+        {id: "Size", label: "사이즈", placeholder: "사이즈(예:S, M, L, XL)을 입력하세요."},
+        {id: "Material", label: "소재", placeholder: "소재를 입력하세요."},
+        {id: "Price", label: "가격", placeholder: "가격을 입력하세요."},
+        {id: "Stock", label: "재고 수량", placeholder: "재고수량을 입력하세요."},
+        {id: "Gender", label: "성별", placeholder: "성별(예:공용, 남성, 여성)을 입력하세요."},
+        {id: "Season", label: "시즌", placeholder: "계절(예:봄, 여름, 가을, 겨울, 사계절) 을 입력하세요."},// index = 9 번
     ]
     return (
         <div className="container px-5">

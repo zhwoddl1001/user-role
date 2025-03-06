@@ -76,5 +76,24 @@ const apiProductService = {
                 )
         },
 
+    updateProduct:
+        function (){
+
+        },
+
+    deleteProduct:
+    function (productId,navigate){
+        axios
+            .delete(`http://localhost:8080/api/products/${productId}`)
+            .then(()=>{
+                alert("삭제가 완료되었습니다")
+                navigate("/products");
+            })
+            .catch((err)=>{
+                alert("상품을 삭제할 수 없습니다.")
+                console.error("상품삭제 실패",err)
+            })
+    },
+
 }
 export default apiProductService;

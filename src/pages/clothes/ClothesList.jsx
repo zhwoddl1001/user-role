@@ -28,10 +28,10 @@ const ClothesList = () => {
                 <div className="row mt-5">
                     {clothes.map((clothe)=>(
                         <ClothesCard
-                        key={clothe.cid}
-                        id={clothe.cid}
-                        name={clothe.cname}
-                        price={clothe.cprice}
+                        key={clothe.id}
+                        id={clothe.id}
+                        name={clothe.name}
+                        price={clothe.price}
                         image="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
 
                         onDelete={handleDelete}/>

@@ -61,6 +61,7 @@ function PathRoute () {
                 <Route path="/products/search" element={<ProductSearch />} />
                 <Route path="/products/:productId" element={<ProductDetail />} />
                 <Route path="/products/add" element={<InsertPost/>} />
+                <Route path="/products/edit/:productId" element={<InsertPost/>} />
 
                 {/*Clothes 경로 설정*/}
                 <Route path="/clothesList" element={<ClothesList />} />

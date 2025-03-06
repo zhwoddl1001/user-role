@@ -16,7 +16,7 @@ const ClothesDetail = () => {
     return (
         <div className="ClothesDetail-container">
             <div className="EditClothes-container">
-                <h3>{clothe.cname}상세보기</h3>
+                <h3>{clothe.name}상세보기</h3>
             </div>
         </div>
     )
